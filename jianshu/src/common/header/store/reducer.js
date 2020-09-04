@@ -8,6 +8,9 @@ import { fromJS } from "immutable";
 const defaultState = fromJS({
   isFous: false,
   list: [],
+  isMouseIn: false,
+  page: 1,
+  totalPage: 1,
 });
 
 /**
@@ -39,7 +42,22 @@ export default (state = defaultState, action) => {
     case constants.SEARCH_BLUR:
       return state.set("isFous", false);
     case constants.CHANGE_LISTS:
-      return state.set("list", action.data);
+      // return state
+      //   .merge({
+      //     list: action.list,
+      //     page: action.page,
+      //     totalPage: action.totalPage,
+      //   });
+      return state
+        .set("list", action.data)
+        .set("totalPage", action.totalPage)
+        .set("page", action.page);
+    case constants.MOUSE_IN:
+      return state.set("isMouseIn", true);
+    case constants.MOUSE_OUT:
+      return state.set("isMouseIn", false);
+    case constants.CHANGEPAGENUMBER:
+      return state.set("page", action.page);
     default:
       return state;
   }

@@ -1,12 +1,14 @@
-import React from "react";
+import React, { Fragment } from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-import store from "./store";
-import { Provider } from "react-redux";
+import { Globalstyle } from "./style.js";
+import { IconfontGlobalstyle } from "./statics/iconfont/iconfont";
 
 ReactDOM.render(
-  <Provider store={store}>
+  <Fragment>
+    <Globalstyle />
+    <IconfontGlobalstyle />
     <App />
-  </Provider>,
+  </Fragment>,
   document.getElementById("root")
 );
