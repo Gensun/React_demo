@@ -1,6 +1,5 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
-
 //通过export方式导出，在导入时要加{ }，export default则不需要
 import List from "./components/List";
 import Recommend from "./components/Recommend";
@@ -65,7 +64,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(actionCreators.getHomeInfo());
   },
   changeScrollTopShow() {
-		if (document.documentElement.scrollTop > 100) {
+    if (document.documentElement.scrollTop > 100) {
       dispatch(actionCreators.toggleTopShow(true));
     } else {
       dispatch(actionCreators.toggleTopShow(false));

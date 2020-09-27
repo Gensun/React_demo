@@ -68,6 +68,18 @@ export const ListItem = styled.div`
   padding: 20px 0;
   border-bottom: 1px solid #dcdcdc;
   overflow: hidden;
+  .img {
+    float: right;
+    width: 150px;
+    height: 100px;
+    background-color: rgb(241, 243, 244);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 4px;
+    margin-left: 15px;
+    cursor: pointer;
+  }
 `;
 
 export const ListInfo = styled.div`
@@ -88,18 +100,7 @@ export const ListInfo = styled.div`
     font-size: 13px;
     line-height: 24px;
   }
-  .img {
-    float: right;
-    width: 150px;
-    height: 100px;
-    background-color: rgb(241, 243, 244);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    border-radius: 4px;
-    margin-left: 15px;
-    cursor: pointer;
-  }
+  
 `;
 
 export const RecommendWrapper = styled.div`

@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { CSSTransition } from "react-transition-group";
+import { Link } from "react-router-dom";
 import { actionCreators } from "./store";
+import { actionCreators as loginActionCreators } from "../../pages/login/store";
 import {
   HeaderWrapper,
   Logo,
@@ -82,15 +84,32 @@ class Header extends Component {
     }
   }
   render() {
-    const { list, isFous, handleFocused, handleBlured } = this.props;
+    const {
+      list,
+      isFous,
+      handleFocused,
+      handleBlured,
+      loginStatus,
+      loginOut,
+    } = this.props;
 
     return (
       <HeaderWrapper>
-        <Logo />
+        <Link to="/">
+          <Logo />
+        </Link>
         <Nav>
           <NavItem className="left active">首页</NavItem>
           <NavItem className="left">下载App</NavItem>
-          <NavItem className="right">登录</NavItem>
+          {!loginStatus ? (
+            <Link to="/login">
+              <NavItem className="right">登录</NavItem>
+            </Link>
+          ) : (
+            <NavItem onClick={loginOut} className="right">
+              退出
+            </NavItem>
+          )}
           <NavItem className="right">
             <i className="iconfont">&#xe636;</i>
           </NavItem>
@@ -114,10 +133,12 @@ class Header extends Component {
         </Nav>
 
         <Addition>
-          <Button className="writting">
-            <i className="iconfont">&#xe67e;</i>
-            写文章
-          </Button>
+          <Link to="/writer">
+            <Button className="writting">
+              <i className="iconfont">&#xe67e;</i>
+              写文章
+            </Button>
+          </Link>
           <Button className="reg">注册</Button>
         </Addition>
       </HeaderWrapper>
@@ -135,13 +156,14 @@ const mapStateToProps = (state) => {
     list: state.getIn(["header", "list"]),
     page: state.getIn(["header", "page"]),
     totalPage: state.getIn(["header", "totalPage"]),
+    loginStatus: state.getIn(["login", "login"]),
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
   handleFocused(list) {
     // console.log(list);
-    (list.size === 0) && dispatch(actionCreators.getLists());
+    list.size === 0 && dispatch(actionCreators.getLists());
     dispatch(actionCreators.searchFouced());
   },
 
@@ -171,6 +193,11 @@ const mapDispatchToProps = (dispatch) => ({
     } else {
       dispatch(actionCreators.changePageNumber(1));
     }
+  },
+
+  loginOut() {
+    console.log("logout");
+    dispatch(loginActionCreators.toLoginOut());
   },
 });
 

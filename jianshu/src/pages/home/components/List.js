@@ -1,22 +1,29 @@
-import React, { Component, Fragment } from "react";
+import React, { PureComponent, Fragment } from "react";
 import { connect } from "react-redux";
 import { ListItem, ListInfo, LoadMore } from "../style";
 import { actionCreators } from "../store";
+import { Link } from "react-router-dom";
 
-class List extends Component {
+class List extends PureComponent {
   render() {
     const { articleList, handleLoadMore, page } = this.props;
     return articleList && articleList.size > 0 ? (
       <Fragment>
-        {articleList.map((item,index) => {
+        {articleList.map((item, index) => {
           return (
-            <ListItem key={index}>
-              <ListInfo>
+            <Link
+              key={index}
+              to={"/detail/" + item.get("id")}
+              style={{ textDecoration: "none" }}
+            >
+              <ListItem>
                 {this.setImage(item)}
-                <h1 className="title">{item.get("title")}</h1>
-                <p className="desc">{item.get("desc")}</p>
-              </ListInfo>
-            </ListItem>
+                <ListInfo>
+                  <h1 className="title">{item.get("title")}</h1>
+                  <p className="desc">{item.get("desc")}</p>
+                </ListInfo>
+              </ListItem>
+            </Link>
           );
         })}
         <LoadMore onClick={() => handleLoadMore(page)}>阅读更多</LoadMore>

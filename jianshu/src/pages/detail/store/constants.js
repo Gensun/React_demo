@@ -1,0 +1,1 @@
+export const DEATIL_PAGE_DATA = "detail/DEATIL_PAGE_DATA";

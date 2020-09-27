@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from "react";
 
-export class Writer extends Component {
-    render() {
-        return <div>Writer</div>;
-    }
+export class Writer extends PureComponent {
+  render() {
+    return <div>Writer</div>;
+  }
 }
 
 export default Writer
